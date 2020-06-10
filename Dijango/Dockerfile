@@ -11,6 +11,11 @@ RUN virtualenv $APP_HOME/django/notejam/
 #RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install pymysql Django==1.6.5  South==1.0
 RUN chmod u+x $APP_HOME/django/notejam/manage.py
+RUN cd $APP_HOME; wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN cd $APP_HOME;chmod +x cloud_sql_proxy
+RUN ./cloud_sql_proxy -instances=$sql =tcp:3306
+RUN ./cloud_sql_proxy -instances=$sql =tcp:3306 \
+                  -credential_file=$APP_HOME/django/gcp.json &
 RUN $APP_HOME/django/notejam/manage.py createsuperuser --username test1 --noinput --email 'blank@email.com'
 RUN $APP_HOME/django/notejam/manage.py syncdb
 RUN $APP_HOME/django/notejam/manage.py migrate
