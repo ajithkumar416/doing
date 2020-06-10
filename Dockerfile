@@ -1,3 +1,4 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y apache2*
-CMD service apache2 start
+CMD echo "ServerName localhost" >> /etc/apache2/apache2.conf
+CMD service apache2 restart
