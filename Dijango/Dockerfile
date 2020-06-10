@@ -3,7 +3,7 @@ ENV APP_HOME /notejam
 WORKDIR $APP_HOME
 #COPY . ./
 ENV PORT=8080
-#RUN apt-get update && apt-get install -y python-pip* git virtualenv* mysql-client* python-mysqld*
+#RUN apt-get update && apt-get install -y wget* python-pip* git virtualenv* mysql-client* python-mysqld*
 RUN apt-get update && apt-get install -y python-pip* git virtualenv*
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/ajithkumar416/django.git
